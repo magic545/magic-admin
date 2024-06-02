@@ -1,3 +1,8 @@
+/*
+ * @Author: Magic Forge
+ * @LastEditors: Magic Forge
+ * @LastEditTime: 2024-06-02 18:38:52
+ */
 /**********************************
  * @Author: Ronnie Zhang
  * @LastEditor: Ronnie Zhang
@@ -26,7 +31,7 @@ export default defineConfig(({ command, mode }) => {
     base: VITE_PUBLIC_PATH || '/',
     plugins: [
       Vue(),
-      VueDevTools(),
+      // VueDevTools(),
       Unocss(),
       AutoImport({
         imports: ['vue', 'vue-router'],

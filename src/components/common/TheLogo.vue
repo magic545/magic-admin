@@ -1,3 +1,8 @@
+<!--
+ * @Author: Magic Forge
+ * @LastEditors: Magic Forge
+ * @LastEditTime: 2024-06-02 20:09:33
+-->
 <!--------------------------------
  - @Author: Ronnie Zhang
  - @LastEditor: Ronnie Zhang
@@ -7,6 +12,6 @@
  --------------------------------->
 <template>
   <div class="h-40 w-40 rounded-4 bg-primary p-1/100">
-    <img src="@/assets/images/isme.png" alt="Logo" />
+    <img src="@/assets/images/magic.png" alt="Logo" />
   </div>
 </template>

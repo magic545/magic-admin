@@ -75,14 +75,14 @@
         />
 
         <div class="mt-20 flex items-center">
-          <n-button
+          <!-- <n-button
             class="h-40 flex-1 rounded-5 text-16"
             type="primary"
             ghost
             @click="quickLogin()"
           >
             一键体验
-          </n-button>
+          </n-button> -->
 
           <n-button
             class="ml-32 h-40 flex-1 rounded-5 text-16"
@@ -103,7 +103,7 @@
 <script setup>
 import { throttle, lStorage } from '@/utils'
 import { useStorage } from '@vueuse/core'
-import api from './api'
+import { AuthApi } from '@/api'
 import { useAuthStore } from '@/store'
 
 const authStore = useAuthStore()
@@ -118,7 +118,7 @@ const loginInfo = ref({
 
 const captchaUrl = ref('')
 const initCaptcha = throttle(() => {
-  captchaUrl.value = '/api/auth/captcha?' + Date.now()
+  captchaUrl.value = `/api/auth/captcha?${Date.now()}`
 }, 500)
 
 const localLoginInfo = lStorage.get('loginInfo')
@@ -143,7 +143,7 @@ async function handleLogin(isQuick) {
   try {
     loading.value = true
     $message.loading('正在验证，请稍后...', { key: 'login' })
-    const { data } = await api.login({ username, password: password.toString(), captcha, isQuick })
+    const { data } = await AuthApi.login({ username, password: password.toString(), captcha, isQuick })
     if (isRemember.value) {
       lStorage.set('loginInfo', { username, password })
     } else {

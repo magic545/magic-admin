@@ -1,3 +1,9 @@
+<!--
+ * @Author: Magic Forge
+ * @LastEditors: Magic Forge
+ * @LastEditTime: 2024-06-02 00:26:37
+ * @Description: 
+-->
 <!--------------------------------
  - @Author: Ronnie Zhang
  - @LastEditor: Ronnie Zhang
@@ -22,15 +28,6 @@
         class="mr-16 cursor-pointer"
         :class="isFullscreen ? 'i-fe:minimize' : 'i-fe:maximize'"
         @click="toggle"
-      />
-
-      <i
-        class="i-fe:github mr-16 cursor-pointer"
-        @click="handleLinkClick('https://github.com/zclzone/vue-naive-admin/tree/2.x')"
-      />
-      <i
-        class="i-me:gitee mr-16 cursor-pointer"
-        @click="handleLinkClick('https://gitee.com/isme-admin/vue-naive-admin/tree/2.x')"
       />
 
       <ThemeSetting class="mr-16" />

@@ -20,7 +20,7 @@
       v-model:query-items="queryItems"
       :scroll-x="1200"
       :columns="columns"
-      :get-data="api.read"
+      :get-data="RoleApi.read"
     >
       <MeQueryItem label="角色名" :label-width="50">
         <n-input v-model:value="queryItems.name" type="text" placeholder="请输入角色名" clearable />
@@ -95,7 +95,7 @@
 import { NButton, NSwitch } from 'naive-ui'
 import { MeCrud, MeQueryItem, MeModal } from '@/components'
 import { useCrud } from '@/composables'
-import api from './api'
+import { RoleApi, PermissionApi } from '@/api'
 
 defineOptions({ name: 'RoleMgt' })
 
@@ -191,7 +191,7 @@ const columns = [
 async function handleEnable(row) {
   row.enableLoading = true
   try {
-    await api.update({ id: row.id, enable: !row.enable })
+    await RoleApi.update({ id: row.id, enable: !row.enable })
     row.enableLoading = false
     $message.success('操作成功')
     $table.value?.handleSearch()
@@ -203,13 +203,13 @@ async function handleEnable(row) {
 const { modalRef, modalFormRef, modalAction, modalForm, handleAdd, handleDelete, handleEdit } =
   useCrud({
     name: '角色',
-    doCreate: api.create,
-    doDelete: api.delete,
-    doUpdate: api.update,
+    doCreate: RoleApi.create,
+    doDelete: RoleApi.delete,
+    doUpdate: RoleApi.update,
     initForm: { enable: true },
     refresh: () => $table.value?.handleSearch(),
   })
 
 const permissionTree = ref([])
-api.getAllPermissionTree().then(({ data = [] }) => (permissionTree.value = data))
+PermissionApi.getAllPermissionTree().then(({ data = [] }) => (permissionTree.value = data))
 </script>

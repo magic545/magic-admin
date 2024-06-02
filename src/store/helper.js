@@ -1,8 +1,8 @@
 import { basePermissions } from '@/settings'
-import api from '@/api'
+import { RoleApi, UserApi } from '@/api'
 
 export async function getUserInfo() {
-  const res = await api.getUser()
+  const res = await UserApi.getUser()
   const { id, username, profile, roles, currentRole } = res.data || {}
   return {
     id,
@@ -20,7 +20,7 @@ export async function getUserInfo() {
 export async function getPermissions() {
   let asyncPermissions = []
   try {
-    const res = await api.getRolePermissions()
+    const res = await RoleApi.getRolePermissions()
     asyncPermissions = res?.data || []
   } catch (error) {
     console.error(error)

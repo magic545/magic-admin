@@ -41,7 +41,7 @@
 import { withModifiers } from 'vue'
 import ResAddOrEdit from './ResAddOrEdit.vue'
 import { NButton } from 'naive-ui'
-import api from '../api'
+import { PermissionApi } from '@/api'
 
 defineProps({
   treeData: {
@@ -109,7 +109,7 @@ function handleDelete(item) {
     async confirm() {
       try {
         $message.loading('正在删除', { key: 'deleteMenu' })
-        await api.deletePermission(item.id)
+        await PermissionApi.deletePermission(item.id)
         $message.success('删除成功', { key: 'deleteMenu' })
         emit('refresh')
         emit('update:currentMenu', null)

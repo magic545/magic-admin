@@ -23,7 +23,7 @@
 <script setup>
 import { useUserStore, useAuthStore, usePermissionStore } from '@/store'
 import { RoleSelect } from '@/layouts/components'
-import api from '@/api'
+import { AuthApi } from '@/api'
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -70,7 +70,7 @@ function handleSelect(key) {
         content: '确认退出？',
         async confirm() {
           try {
-            await api.logout()
+            await AuthApi.logout()
           } catch (error) {
             console.error(error)
           }

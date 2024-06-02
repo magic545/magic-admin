@@ -1,3 +1,9 @@
+<!--
+ * @Author: Magic Forge
+ * @LastEditors: Magic Forge
+ * @LastEditTime: 2024-06-02 00:13:26
+ * @Description: 
+-->
 <!--------------------------------
  - @Author: Ronnie Zhang
  - @LastEditor: Ronnie Zhang
@@ -59,9 +65,6 @@ const { copy, copied } = useClipboard()
 
 const imgList = reactive([
   { url: 'https://cdn.isme.top/images/5c23d52f880511ebb6edd017c2d2eca2.jpg' },
-  { url: 'https://cdn.isme.top/images/5c23d52f880511ebb6edd017c2d2eca2.jpg' },
-  { url: 'https://cdn.isme.top/images/5c23d52f880511ebb6edd017c2d2eca2.jpg' },
-  { url: 'https://cdn.isme.top/images/5c23d52f880511ebb6edd017c2d2eca2.jpg' },
 ])
 
 watch(copied, (val) => {
@@ -85,6 +88,7 @@ async function handleUpload({ file, onFinish }) {
   $message.loading('上传中...')
   setTimeout(() => {
     $message.success('上传成功')
+    console.log(file.file, URL.createObjectURL(file.file))
     imgList.push({ fileName: file.name, url: URL.createObjectURL(file.file) })
     onFinish()
   }, 1500)
