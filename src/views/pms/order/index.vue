@@ -1,7 +1,8 @@
 <!--------------------------------
  - @Author: Magic Forge
  - @LastEditor: Magic Forge
- - @LastEditTime: 2024-06-03 23:28:29
+ - @LastEditTime: 2024-06-04 22:48:55
+ - @Email: magicforge@163.com
  --------------------------------->
 <template>
   <CommonPage>
@@ -14,10 +15,10 @@
 
     <MeCrud ref="$table" v-model:query-items="queryItems" :scroll-x="1200" :columns="columns" :get-data="RoleApi.read">
       <MeQueryItem label="编号" :label-width="50">
-        <n-input v-model:value="queryItems.name" type="text" placeholder="请输入订单编号" clearable />
+        <n-input v-model:value="queryItems.mid" type="text" placeholder="请输入订单编号" clearable />
       </MeQueryItem>
       <MeQueryItem label="关联用户" :label-width="80">
-        <n-input v-model:value="queryItems.username" type="text" placeholder="请输入用户名" clearable />
+        <UserSelect v-model:userId="queryItems.userId" :get-data="UserApi.read" />
       </MeQueryItem>
       <MeQueryItem label="状态" :label-width="50">
         <n-select v-model:value="queryItems.status" clearable :options="[
@@ -33,30 +34,15 @@
     </MeCrud>
     <MeModal ref="modalRef" width="520px">
       <n-form ref="modalFormRef" label-placement="left" label-align="left" :label-width="80" :model="modalForm">
-        <n-form-item label="角色名" path="name" :rule="{
+        <n-form-item label="订单名称" path="name" :rule="{
           required: true,
-          message: '请输入角色名',
+          message: '请输入订单名称',
           trigger: ['input', 'blur'],
         }">
           <n-input v-model:value="modalForm.name" />
         </n-form-item>
-        <n-form-item label="角色编码" path="code" :rule="{
-          required: true,
-          message: '请输入角色编码',
-          trigger: ['input', 'blur'],
-        }">
-          <n-input v-model:value="modalForm.code" :disabled="modalAction !== 'add'" />
-        </n-form-item>
-        <n-form-item label="权限" path="permissionIds">
-          <n-tree key-field="id" label-field="name" :selectable="false" :data="permissionTree"
-            :checked-keys="modalForm.permissionIds" :on-update:checked-keys="(keys) => (modalForm.permissionIds = keys)"
-            default-expand-all checkable check-on-click class="cus-scroll max-h-200 w-full" />
-        </n-form-item>
-        <n-form-item label="状态" path="enable">
-          <n-switch v-model:value="modalForm.enable">
-            <template #checked>启用</template>
-            <template #unchecked>停用</template>
-          </n-switch>
+        <n-form-item label="关联用户" path="username">
+          <UserSelect v-model:userId="modalForm.userId" :get-data="UserApi.read" />
         </n-form-item>
       </n-form>
     </MeModal>
@@ -64,12 +50,12 @@
 </template>
 
 <script setup>
-import { NButton, NSwitch, NTag } from 'naive-ui'
-import { MeCrud, MeQueryItem, MeModal } from '@/components'
+import { NButton, NAvatar, NTag, NText } from 'naive-ui'
+import { MeCrud, MeQueryItem, MeModal, UserSelect } from '@/components'
 import { useCrud } from '@/composables'
-import { RoleApi, PermissionApi } from '@/api'
+import { RoleApi, UserApi } from '@/api'
 
-defineOptions({ name: 'RoleMgt' })
+defineOptions({ name: 'OrderMgt' })
 
 const router = useRouter()
 
@@ -82,7 +68,7 @@ onMounted(() => {
 })
 
 const columns = [
-  { title: '序号', key: 'id' },
+  { title: '编号', key: 'mid' },
   { title: '名称', key: 'name' },
   {
     title: '状态',
@@ -146,7 +132,4 @@ const { modalRef, modalFormRef, modalAction, modalForm, handleAdd, handleDelete,
     initForm: { enable: true },
     refresh: () => $table.value?.handleSearch(),
   })
-
-const permissionTree = ref([])
-PermissionApi.getAllPermissionTree().then(({ data = [] }) => (permissionTree.value = data))
 </script>

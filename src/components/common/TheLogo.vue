@@ -1,14 +1,8 @@
-<!--
- * @Author: Magic Forge
- * @LastEditors: Magic Forge
- * @LastEditTime: 2024-06-02 20:09:33
--->
 <!--------------------------------
- - @Author: Ronnie Zhang
- - @LastEditor: Ronnie Zhang
- - @LastEditTime: 2024/03/04 16:09:47
- - @Email: zclzone@outlook.com
- - Copyright © 2023 Ronnie Zhang(大脸怪) | https://isme.top
+ - @Author: Magic Forge
+ - @LastEditor: Magic Forge
+ - @LastEditTime: 2024-06-04 22:04:05
+ - @Email: magicforge@163.com
  --------------------------------->
 <template>
   <div class="h-40 w-40 rounded-4 bg-primary p-1/100">

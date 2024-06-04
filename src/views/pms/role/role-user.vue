@@ -34,7 +34,7 @@
       v-model:query-items="queryItems"
       :scroll-x="1200"
       :columns="columns"
-      :get-data="UserApi.getAllUsers"
+      :get-data="UserApi.read"
       @on-checked="onChecked"
     >
       <MeQueryItem label="用户名" :label-width="50">
