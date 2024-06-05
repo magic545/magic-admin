@@ -1,7 +1,7 @@
 /**********************************
  * @Author: Ronnie Zhang
  * @LastEditor: Ronnie Zhang
- * @LastEditTime: 2023/12/05 21:25:47
+ * @LastEditTime: 2024-06-05 21:20:52
  * @Email: zclzone@outlook.com
  * Copyright © 2023 Ronnie Zhang(大脸怪) | https://isme.top
  **********************************/
@@ -23,7 +23,7 @@ export const usePermissionStore = defineStore('permission', {
         .filter((item) => item.type === 'MENU')
         .map((item) => this.getMenuItem(item))
         .filter((item) => !!item)
-        .sort((a, b) => a.order - b.order)
+        .sort((a, b) => a.sort - b.sort)
     },
     getMenuItem(item, parent) {
       const route = this.generateRoute(item, item.show ? null : parent?.key)
@@ -35,14 +35,14 @@ export const usePermissionStore = defineStore('permission', {
         path: route.path,
         originPath: route.meta.originPath,
         icon: () => h('i', { class: `${route.meta.icon} text-16` }),
-        order: item.order ?? 0,
+        sort: item.sort ?? 0,
       }
       const children = item.children?.filter((item) => item.type === 'MENU') || []
       if (children.length) {
         menuItem.children = children
           .map((child) => this.getMenuItem(child, menuItem))
           .filter((item) => !!item)
-          .sort((a, b) => a.order - b.order)
+          .sort((a, b) => a.sort - b.sort)
         if (!menuItem.children.length) delete menuItem.children
       }
       return menuItem

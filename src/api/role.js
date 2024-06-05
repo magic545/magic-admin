@@ -1,3 +1,9 @@
+/**********************************
+ * @Author: Magic Forge
+ * @LastEditor: Magic Forge
+ * @LastEditTime: 2024-06-05 22:35:23
+ * @Email: magicforge@163.com
+ ***********************************/
 /*
  * @Author: Magic Forge
  * @LastEditors: Magic Forge
@@ -13,7 +19,7 @@ export default {
 
   // 权限增删改查
   create: (data) => request.post('/role', data),
-  read: (params = {}) => request.get('/role/page', { params }),
+  read: (params = {}) => request.get('/role', { params }),
   update: (data) => request.patch(`/role/${data.id}`, data),
   delete: (id) => request.delete(`/role/${id}`),
 

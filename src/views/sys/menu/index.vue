@@ -56,7 +56,7 @@
               {{ currentMenu.keepAlive ? '是' : '否' }}
             </n-descriptions-item>
             <n-descriptions-item label="排序">
-              {{ currentMenu.order ?? '--' }}
+              {{ currentMenu.sort ?? '--' }}
             </n-descriptions-item>
           </n-descriptions>
 

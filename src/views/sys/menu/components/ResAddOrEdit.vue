@@ -131,7 +131,7 @@
           v-if="modalForm.type === 'MENU'"
           :span="12"
           label="排序"
-          path="order"
+          path="sort"
           :rule="{
             type: 'number',
             required: true,
@@ -139,7 +139,7 @@
             trigger: ['blur', 'change'],
           }"
         >
-          <n-input-number v-model:value="modalForm.order" />
+          <n-input-number v-model:value="modalForm.sort" />
         </n-form-item-gi>
       </n-grid>
     </n-form>
