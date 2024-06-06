@@ -1,7 +1,7 @@
 <!--------------------------------
  - @Author: Magic Forge
  - @LastEditor: Magic Forge
- - @LastEditTime: 2024-06-05 23:40:16
+ - @LastEditTime: 2024-06-06 23:37:06
  - @Email: magicforge@163.com
  --------------------------------->
 <template>
@@ -18,10 +18,10 @@
         <n-input v-model:value="queryItems.number" placeholder="请输入订单编号" clearable />
       </MeQueryItem>
       <MeQueryItem label="关联用户" :label-width="80">
-        <UserSelect v-model:userId="queryItems.userId" :get-data="UserApi.read" />
+        <UserSelect v-model:value="queryItems.userId" :get-data="UserApi.read" clearable />
       </MeQueryItem>
       <MeQueryItem label="状态" :label-width="50">
-        <n-select v-model:value="queryItems.state" clearable :options="stateOptions" />
+        <n-select v-model:value="queryItems.state" :options="stateOptions" clearable filterable />
       </MeQueryItem>
     </MeCrud>
     <MeModal ref="modalRef" width="520px">
@@ -40,8 +40,8 @@
         }">
           <n-input v-model:value="modalForm.description" type="textarea" />
         </n-form-item>
-        <n-form-item label="关联用户" path="userId">
-          <UserSelect v-model:userId="queryItems.userId" :get-data="UserApi.read" />
+        <n-form-item v-if="!['edit'].includes(modalAction)" label="关联用户" path="userId">
+          <UserSelect v-model:value="modalForm.userId" :get-data="UserApi.read" />
         </n-form-item>
       </n-form>
     </MeModal>
@@ -78,12 +78,13 @@ const stateOptions = [
 ]
 
 const columns = [
-  { title: '编号', key: 'number' },
-  { title: '名称', key: 'name' },
+  { title: '编号', key: 'number', width: 200, align: 'center' },
+  { title: '名称', key: 'name', width: 200, align: 'center', ellipsis: { tooltip: true } },
   {
     title: '状态',
     key: 'state',
-    ellipsis: { tooltip: true },
+    width: 100,
+    align: 'center',
     render: (row) => {
       const option = stateOptions.find(item => item.value == row.state) || {}
       return h(
@@ -93,12 +94,13 @@ const columns = [
       )
     },
   },
-  { title: '关联用户', key: 'username' },
+  { title: '关联用户', key: 'nickName' },
+  { title: '创建时间', key: 'createTime' },
   {
     title: '操作',
     key: 'actions',
-    width: 320,
-    align: 'right',
+    width: 200,
+    align: 'center',
     fixed: 'right',
     render(row) {
       return [

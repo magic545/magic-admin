@@ -1,29 +1,37 @@
 <!--------------------------------
  - @Author: Magic Forge
  - @LastEditor: Magic Forge
- - @LastEditTime: 2024-06-04 22:43:14
+ - @LastEditTime: 2024-06-06 23:31:12
  - @Email: magicforge@163.com
  --------------------------------->
 <template>
-  <n-select v-model:value="userId" :options="userList" :render-label="renderLabel" :render-tag="renderSingleSelectTag"
-    :on-update:value="selectChange" filterable clearable />
+  <n-select v-model:value="model" :options="userList" :render-label="renderLabel" :render-tag="renderSingleSelectTag"
+    :filterable="filterable" :clearable="clearable" :disabled="disabled" />
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
 import { NAvatar, NText } from 'naive-ui'
-const emit = defineEmits(['update:userId',])
+const model = defineModel()
 const props = defineProps({
-  userId: {
-    type: Number,
-  },
   getData: {
     type: Function,
     required: true,
   },
+  clearable: {
+    type: Boolean,
+    default: false
+  },
+  filterable: {
+    type: Boolean,
+    default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  }
 })
 
-const userId = ref(props.userId)
 const userList = ref([])
 const renderLabel = (option) => {
   return h(
@@ -90,10 +98,6 @@ const renderSingleSelectTag = ({ option }) => {
       )
     ]
   )
-}
-
-const selectChange = (value) => {
-  emit('update:userId', value)
 }
 
 onMounted(() => {

@@ -1,7 +1,7 @@
 <!--------------------------------
  - @Author: Ronnie Zhang
  - @LastEditor: Ronnie Zhang
- - @LastEditTime: 2023/12/05 21:29:56
+ - @LastEditTime: 2024-06-06 22:27:04
  - @Email: zclzone@outlook.com
  - Copyright © 2023 Ronnie Zhang(大脸怪) | https://isme.top
  --------------------------------->
@@ -18,7 +18,7 @@
     <MeCrud
       ref="$table"
       v-model:query-items="queryItems"
-      :scroll-x="1200"
+      :scroll-x="1250"
       :columns="columns"
       :get-data="UserApi.read"
     >
@@ -198,7 +198,7 @@ const columns = [
     title: '操作',
     key: 'actions',
     width: 320,
-    align: 'right',
+    align: 'center',
     fixed: 'right',
     hideInExcel: true,
     render(row) {

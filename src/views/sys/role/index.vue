@@ -1,7 +1,7 @@
 <!--------------------------------
  - @Author: Ronnie Zhang
  - @LastEditor: Ronnie Zhang
- - @LastEditTime: 2024/04/01 15:52:40
+ - @LastEditTime: 2024-06-06 22:27:51
  - @Email: zclzone@outlook.com
  - Copyright © 2023 Ronnie Zhang(大脸怪) | https://isme.top
  --------------------------------->
@@ -136,7 +136,7 @@ const columns = [
     title: '操作',
     key: 'actions',
     width: 320,
-    align: 'right',
+    align: 'center',
     fixed: 'right',
     render(row) {
       return [
@@ -147,7 +147,7 @@ const columns = [
             type: 'primary',
             secondary: true,
             onClick: () =>
-              router.push({ path: `/pms/role/user/${row.id}`, query: { roleName: row.name } }),
+              router.push({ path: `/sys/role/user/${row.id}`, query: { roleName: row.name } }),
           },
           {
             default: () => '分配用户',
