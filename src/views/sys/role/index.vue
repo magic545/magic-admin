@@ -15,70 +15,37 @@
       </n-button>
     </template>
 
-    <MeCrud
-      ref="$table"
-      v-model:query-items="queryItems"
-      :scroll-x="1200"
-      :columns="columns"
-      :get-data="RoleApi.read"
-    >
+    <MeCrud ref="$table" v-model:query-items="queryItems" :scroll-x="1200" :columns="columns" :get-data="RoleApi.read">
       <MeQueryItem label="角色名" :label-width="50">
         <n-input v-model:value="queryItems.name" type="text" placeholder="请输入角色名" clearable />
       </MeQueryItem>
       <MeQueryItem label="状态" :label-width="50">
-        <n-select
-          v-model:value="queryItems.enable"
-          clearable
-          :options="[
-            { label: '启用', value: 1 },
-            { label: '停用', value: 0 },
-          ]"
-        />
+        <n-select v-model:value="queryItems.enable" clearable :options="[
+          { label: '启用', value: 1 },
+          { label: '停用', value: 0 },
+        ]" />
       </MeQueryItem>
     </MeCrud>
     <MeModal ref="modalRef" width="520px">
-      <n-form
-        ref="modalFormRef"
-        label-placement="left"
-        label-align="left"
-        :label-width="80"
-        :model="modalForm"
-      >
-        <n-form-item
-          label="角色名"
-          path="name"
-          :rule="{
-            required: true,
-            message: '请输入角色名',
-            trigger: ['input', 'blur'],
-          }"
-        >
+      <n-form ref="modalFormRef" label-placement="left" label-align="left" :label-width="80" :model="modalForm">
+        <n-form-item label="角色名" path="name" :rule="{
+          required: true,
+          message: '请输入角色名',
+          trigger: ['input', 'blur'],
+        }">
           <n-input v-model:value="modalForm.name" />
         </n-form-item>
-        <n-form-item
-          label="角色编码"
-          path="code"
-          :rule="{
-            required: true,
-            message: '请输入角色编码',
-            trigger: ['input', 'blur'],
-          }"
-        >
+        <n-form-item label="角色编码" path="code" :rule="{
+          required: true,
+          message: '请输入角色编码',
+          trigger: ['input', 'blur'],
+        }">
           <n-input v-model:value="modalForm.code" :disabled="modalAction !== 'add'" />
         </n-form-item>
         <n-form-item label="权限" path="permissionIds">
-          <n-tree
-            key-field="id"
-            label-field="name"
-            :selectable="false"
-            :data="permissionTree"
-            :checked-keys="modalForm.permissionIds"
-            :on-update:checked-keys="(keys) => (modalForm.permissionIds = keys)"
-            default-expand-all
-            checkable
-            check-on-click
-            class="cus-scroll max-h-200 w-full"
-          />
+          <n-tree key-field="id" label-field="name" :selectable="false" :data="permissionTree"
+            :checked-keys="modalForm.permissionIds" :on-update:checked-keys="(keys) => (modalForm.permissionIds = keys)"
+            default-expand-all checkable check-on-click class="cus-scroll max-h-200 w-full" />
         </n-form-item>
         <n-form-item label="状态" path="enable">
           <n-switch v-model:value="modalForm.enable">
@@ -146,8 +113,7 @@ const columns = [
             size: 'small',
             type: 'primary',
             secondary: true,
-            onClick: () =>
-              router.push({ path: `/sys/role/user/${row.id}`, query: { roleName: row.name } }),
+            onClick: () => router.push({ path: `/sys/role/user/${row.id}`, query: { roleName: row.name } }),
           },
           {
             default: () => '分配用户',
